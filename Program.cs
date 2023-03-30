@@ -1,5 +1,9 @@
 using Vega.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<VegaDbContext>(options => options.UseSqlServer("..."));
-
+builder.Services.AddDbContext<VegaDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
